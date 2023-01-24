@@ -52,6 +52,15 @@ app.get("/", (req, res) => {
     res.send("<h1>Hello World</h1>")
 })
 
+// INDEX ROUTE
+app.get("/findmylicense", async (req, res) => {
+    try {
+        res.json(await License.find({}))
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
 /***************************** */
 // SERVER LISTENER
 /***************************** */
