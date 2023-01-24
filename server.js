@@ -61,6 +61,15 @@ app.get("/findmylicense", async (req, res) => {
     }
 })
 
+// CREATE ROUTE
+app.post("/findmylicense", async (req, res) => {
+    try {
+        res.json(await License.create(req.body))
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
 /***************************** */
 // SERVER LISTENER
 /***************************** */
