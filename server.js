@@ -70,6 +70,33 @@ app.post("/findmylicense", async (req, res) => {
     }
 })
 
+// GET LICENSE FOR ID ROUTE
+app.get('/findmylicense/:id', async (req, res) => {
+    try{
+        res.json(await License.findById(req.params.id))
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
+
+// UPDATE LICENSE ROUTE
+app.put('/findmylicense/:id', async (req, res) => {
+    try{
+        res.json(await License.findByIdAndUpdate(req.params.id, req.body, {new: true}))
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
+
+// DELETE LICENSE ROUTE
+app.delete('/findmylicense/:id', async (req, res) => {
+    try{
+        res.json(await License.findByIdAndDelete(req.params.id))
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
+
 /***************************** */
 // SERVER LISTENER
 /***************************** */
