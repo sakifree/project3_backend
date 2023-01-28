@@ -3,13 +3,15 @@
 /***************************** */
 require("dotenv").config()
 const express = require("express")
+const app = express()
 const mongoose = require("mongoose")
 const cors = require("cors")
 const morgan = require("morgan")
+const AuthRouter = require('./controllers/user')
+const auth = require('./auth')
 
 const { PORT = 3030, DATABASE_URL } = process.env
 
-const app = express()
 
 /***************************** */
 // DATABASE CONNECTION
@@ -44,6 +46,14 @@ const License = mongoose.model("License", LicenseSchema)
 app.use(cors())
 app.use(morgan("dev"))
 app.use(express.json())
+
+// ROUTERS
+
+app.get('/', auth, (req, res) => {
+    res.json(req.payload)
+})
+
+app.use('/auth', AuthRouter)
 
 /***************************** */
 // ROUTES
